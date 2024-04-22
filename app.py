@@ -26,7 +26,7 @@ pio.templates["custom_theme"] = go.layout.Template(
 pio.templates.default = 'custom_theme'
 #read data and define for layout
 gapminder_df = px.data.gapminder().query("year==2003")
-df = pd.read_csv('/data/mydata2.csv')
+df = pd.read_csv('data/mydata2.csv')
 rad_columns = ["stability",	"rights",	"health",	"safety",	"climate",	"cost",	"popularity"]
 range = [0,10,20,30,40,50,60,70,80,90,100]
 
