@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1idghsQnQbgSjhd1RpMUOzc32yoXZVrIn
 """
 
-!pip install dash
 
 import pandas as pd
 import numpy as np
@@ -16,7 +15,6 @@ from dash import Dash, dcc, html, Input, Output, callback
 from datetime import date
 import plotly.graph_objects as go
 import plotly.io as pio
-import base64
 
 
 #color theme
