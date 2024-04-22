@@ -1,5 +1,7 @@
 # DS4003FinalTermProject
 
+Dashboard Link: https://ds4003finaltermproject.onrender.com
+
 The following dashboard was inspired by a dataset found alongside data describing the quality of life of a 137 countries based on this weighted dashboard: https://www.worlddata.info/quality-of-life.php
 
 In researching a term project idea, a concept I learned about revolved around the usefulness and reliability of setting weights to specific metrics. By setting manual weights of metrics you value, an individual is inadvertently setting marginal rates for what trade-offs they are willing to make. A user may not recognize that as they move the dials for their own weightings in the original dashboard, their rankings will be skewed and may not reflect their initial assumptions that the dial presents. In order to remedy this, I sought out to eliminate the ability to 'rank' and weight metrics, and instead allow users to make their own decisions based on metrics they value more than others. For example, in the previous dashboard, if I valued safety over everything else, I would slide my weighting further. How far my weighting is shifted is entirely dependent on the range of the metric, which is unknown to the user. In this example, rankings are not utilized and an objective, side by side comparison by metric and country is presented. Objective, transparent analysis is the goal.
