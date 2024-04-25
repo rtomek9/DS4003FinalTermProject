@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1idghsQnQbgSjhd1RpMUOzc32yoXZVrIn
 """
 
-
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -15,6 +14,7 @@ from dash import Dash, dcc, html, Input, Output, callback
 from datetime import date
 import plotly.graph_objects as go
 import plotly.io as pio
+import base64
 
 
 #color theme
@@ -40,9 +40,16 @@ dropdown_columns = [col for col in df.columns if col not in ['iso_alpha', 'popul
 
 #define layout - title, description, dropdowns, radar plot, bar chart, bubble charts, population bubble map
 app.layout = html.Div([
+        html.Div([
+            html.Img(src=app.get_asset_url(image_filename),
+                    style={ 'top': 8, 'left': 8, 'width': '12%', 'height': '100px', 'z-index': '0', 'opacity': '0.6'})]),
 
-    html.H2("Oh, the Places You'll Go!", style={'text-align': 'center'}),
-    html.P("The following dashboard offers an overview of key factors impacting quality of life in 137 different countries across the world. It assesses economic and political stability, legal systems, health services, safety, climate, costs, and popularity. Current data stems from reputable sources such as the World Bank, Transparency.org, the United Nations, and more. Every metric is normalized on a scale from 0-100 based on their source."),
+
+    html.H2("OH, THE PLACES YOU'LL GO!", style={'text-align': 'center', 'font-family': 'verdana', 'font-weight':' bold'}),
+    html.Div([
+    html.P("The following dashboard offers an overview of key factors impacting quality of life in 137 different countries across the world. It assesses economic and political stability, legal systems, health services, safety, climate, costs, and popularity. Current data stems from reputable sources such as the World Bank, Transparency.org, the United Nations, and more. Every metric is normalized on a scale from 0-100 based on their source.")
+],style={ 'right': 10, 'left': 10}),
+        html.Br(),#style={ 'right': 10, 'left': 10})]),
     html.Div([
         html.H4("Select two countries", style={'text-align': 'center'}),
         dcc.Dropdown(
@@ -51,8 +58,9 @@ app.layout = html.Div([
             value=df['country'][12:14],  #pre-select the first two countries
             multi=True  #set multi attribute to True
         ),
+       # html.H5("Quality of Life Radar Plot By Countries", style={'text-align': 'center'}),
         dcc.Graph(id='polar-plot', figure={}),
-    ], style={'display': 'inline-block', 'width': '50%'}),
+    ], style={'display': 'inline-block', 'width': '50%', 'background-color': '#FD6895', 'border-radius': '20px'}),
 
     html.Div([
         html.H4("Select two metrics", style={'text-align': 'center'}),
@@ -62,17 +70,20 @@ app.layout = html.Div([
             value=["climate", "health"],
             multi=True
         ),
+        #html.H5("Bar Plot of Metrics", style={'text-align': 'center'}),
         dcc.Graph(id='bar-chart', figure={}),
-    ], style={'display': 'inline-block', 'width': '50%', 'vertical-align': 'top', 'float': 'right'}),
-
+    ], style={'display': 'inline-block', 'width': '50%', 'vertical-align': 'top', 'float': 'right', 'background-color': '#FCEB00', 'border-radius': '20px'}),
+#'background-color':'#F4EEED', 'border-radius': '20px'
     html.Div([
         html.Div([
-            html.Div(id='country-info', style={'text-align': 'center'}),
-            html.H4("Hover over the bubbles to compare all metrics", style={'text-align': 'center'}),
+            html.Div(id='country-info', style={'text-align': 'center','background-color': '#eeeeee', 'border-radius': '20px'}),
+            html.Br(),
+            html.H4("Hover over the bubbles to compare all metrics", style={'text-align': 'center', 'background-color': '#FD6895', 'border-radius': '20px', 'padding': 15}),
             html.Div(id='bubble-chart-container', style={'display': 'flex', 'justify-content': 'center'}),
-            html.H4("Population by Country", style={'text-align': 'center'}),
+
+            html.H4("Population by Country", style={'text-align': 'center', 'background-color': '#FD6895', 'padding': 15, 'border-radius': 20}),
             dcc.Graph(id='geo-map', figure={}, style={'align-self': 'center'}),
-        ], style={'max-width': '900px', 'margin': '0 auto'})
+        ], style={'max-width': '900px', 'margin': '0 auto'}) #style = {'background-color':'#283D3B'}),
     ]),
    html.P("So...be your name Buxbaum or Bixby or Bray"),
    html.P ("or Mordecai Ali Van Allen O'Shea,"),
@@ -80,7 +91,9 @@ app.layout = html.Div([
     html.P("Today is your day!"),
 html.P("Your mountain is waiting"),
 html.P("So...get on your way!"),
-html.P("-Dr. Suess", style={'text-align': 'right'})
+
+html.P("-Dr. Suess", style={'text-align': 'right'}),
+
 ])
 
 #callbacks
